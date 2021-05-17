@@ -16,13 +16,10 @@
 
 ## Add the First-Person Character Controller
 Nice video that gives a lot of the process [here](https://www.youtube.com/watch?v=Gxmx69QVuRY)
-- Go to Unity Asset Store in web browser
-- Grab the Standard Assets
-- Download them
-- Import the FPS Controller and Utility tools
-- Fix the compiler errors
-  - Go to the github with the fix scripts and overwrite them in the file explorer
-- In the ```Project``` window, go to ```Assets```, ```Standard Assets```, ```Characters```, ```FirstPersonCharacter```, ```Prefabs```, and drop the FPSController into the Hierarchy window.
+- Go to Unity Asset Store. In the ```Window``` menu there's a link to the Unity Asset Store, which anyway opens in a web browser (it's also [here](https://assetstore.unity.com/)). You have to be signed in to a Unity account to make this work, but presumably you have an account that you created in order to install the Unity Hub; let's hope you remember the password.
+- Grab the Standard Assets (as of time of writing, they're called _Standard Assets for Unity 2018.4_). You can't download them directly, you click a link ```Open in Unity``` and, if all goes well, return to the Unity editor and download them via the Package Manager.
+- After downloading the Standard Assets, you need to import them. You only actually need to import the FPS Controller and Utility sections, but I don't think it does a great deal of harm to import everything (maybe it makes your eventual builds bigger, but not obviously from what I can see). 
+- [Fix the compiler errors](script/fix_standard_asset_compiler_errors.md) which will otherwise prevent you from using the Standard Assets.
 - In the Hierarchy window, expand the FPSController arrow, and click the FirstPersonCharacter icon.
   - It'll probably place it in an unhelpful location. Head over to the Inspector and set the z position to 0.
 

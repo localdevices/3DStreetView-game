@@ -1,0 +1,2 @@
+  - Go to the github with the fix scripts and overwrite them in the file explorer
+- In the ```Project``` window, go to ```Assets```, ```Standard Assets```, ```Characters```, ```FirstPersonCharacter```, ```Prefabs```, and drop the FPSController into the Hierarchy window.
