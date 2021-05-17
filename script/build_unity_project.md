@@ -15,6 +15,7 @@
 - Drag the .obj file into the Hierarchy window on the upper left (in the Sample Scene).
 
 ## Add the First-Person Character Controller
+Nice video that gives a lot of the process [here](https://www.youtube.com/watch?v=Gxmx69QVuRY)
 - Go to Unity Asset Store in web browser
 - Grab the Standard Assets
 - Download them
