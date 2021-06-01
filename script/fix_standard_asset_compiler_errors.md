@@ -1,5 +1,0 @@
-  - The Unity Standard Assets have apparently been abandoned, and are now broken. However, someone has posted a fix. [Here's the Youtube video where I found it](https://www.youtube.com/watch?v=Lzpeez_kdis&t=0s)/
-- Go to [this github page](https://github.com/johnathanhales/UnityStandardAssetFixes), and download the files ```FPSCounter.cs```, ```ForcedReset.cs```, and ```SimpleActivatorMenu.cs```.
-- You should probably exit Unity before the next step. Maybe it's fine, up to you if you want to try it while running.
-- In your file explorer, drop those three scripts into ```/path/to/project/Assets/Standard Assets/Utility``` directory. It'll ask if you want to overwrite the originals. You do.
-- Restart Unity, and the Standard Assets FPSController now works.
