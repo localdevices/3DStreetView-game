@@ -6,3 +6,6 @@
 - Start a new project. Choose the 3D template. Put the project directory somewhere sensible (it defaults to your home directory).
 
 That should do it. Assuming this all worked, you now have an fresh, empty Unity project based on the 3D template. Now [head to the next step, wherein you'll build a Unity project containing the mesh from OpenDroneMap](/script/build_unity_project.md).
+
+## Gotchas
+You might encounter an error trying to build WebGL projects on Linux. [Here](https://forum.unity.com/threads/cant-build-webgl-because-of-il2cpp-suddenly-crashes-on-ubuntu-19-04.764123/) is a link to a discussion of that. In my case it was solved with ```sudo apt install libtinfo5```. 
