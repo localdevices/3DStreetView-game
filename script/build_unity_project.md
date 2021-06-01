@@ -23,4 +23,9 @@
 - In the Hierarchy pane, select the player. Then drag the child Camera into the PlayerCamera slot in the PlayerController script properties (which probably says ```Transform None``` at the moment) in the Inspector. This links the camera to the corresponding object in the script (and is easy to forget, which will cause the controls to not work).
 - You should be able to press the play button at the top of the editor screen and try it now. To exit play mode, press the play button again (there's no stop button, and the pause button doesn't exit play mode). 
 
+## Lighting
+The single-point lighting that seems to be the default in Unity leaves nasty shadows in the scene. Global illumination would be better, presumably. However, it seems as though this makes it tricky to build for WebGL. To be investigated. 
+
 # Build for WebGL
+- Select ```File``` -> ```Build Settings```, select WebGL, and press ```Switch Platform```. That takes some time as Unity pre-processes a bunch of stuff.
+- Push the Build button?
