@@ -28,4 +28,10 @@ The single-point lighting that seems to be the default in Unity leaves nasty sha
 
 # Build for WebGL
 - Select ```File``` -> ```Build Settings```, select WebGL, and press ```Switch Platform```. That takes some time as Unity pre-processes a bunch of stuff.
-- Push the Build button?
+- You'll need to disable compression on the build; for some reason the compression causes the WebGL app to load to 90% and stop.
+  - In the Build Settings pane, push the ```Player Settings...``` button on the lower left. Select ```Player``` along the left, and set ```Compression Format``` to Disabled.
+- Push the Build button. If you're on Linux and encounter a failure, it might be the library issue in the Gotchas section of the [Unity setup](/script/unity_setup) instructions.
+- If it works, it'll output a folder containing an index.html file and a couple of folders full of data. That's what you'll stick on a Web server somewhere.
+  - To test it locally, ```cd``` into the folder, and start a tiny local webserver with ```python3 -m http.server --cgi 8360```. Then in your browser type the address ```http://localhost:8360/index.html```.
+## Deploy
+- Get a server and a domain name, set up the nameservers, install Nginx, set up SSL with LetsEncrypt, stick the index.html file and data folders in the www data directory.
