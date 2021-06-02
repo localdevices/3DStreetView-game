@@ -8,15 +8,30 @@
 - Open your file explorer, and in the Unity directory, go to the ```Assets``` subdirectory. In it, create a directory called ```odm_mesh```.
 - Drop the entire ```odm_textured_model``` directory in there, _including the .obj file with the y-axis facing up_.
 - Head back to the Unity editor, which will proceed to import the model (takes a few minutes).
-- Drag the .obj file into the Hierarchy window on the upper left (in the Sample Scene).
+- Drag the .obj file into the Hierarchy window on the upper left (in the Sample Scene). It should appear in the Scene tab.
 
 ## Add the First-Person Character Controller
-Nice video that gives a lot of the process [here](https://www.youtube.com/watch?v=Gxmx69QVuRY)
-- Go to Unity Asset Store. In the ```Window``` menu there's a link to the Unity Asset Store, which anyway opens in a web browser (it's also [here](https://assetstore.unity.com/)). You have to be signed in to a Unity account to make this work, but presumably you have an account that you created in order to install the Unity Hub; let's hope you remember the password.
-- Grab the Standard Assets (as of time of writing, they're called _Standard Assets for Unity 2018.4_). You can't download them directly, you click a link ```Open in Unity``` and, if all goes well, return to the Unity editor and download them via the Package Manager.
-- After downloading the Standard Assets, you need to import them. You only actually need to import the FPS Controller and Utility sections, but I don't think it does a great deal of harm to import everything (maybe it makes your eventual builds bigger, but not obviously from what I can see). 
-- [Fix the compiler errors](/script/fix_standard_asset_compiler_errors.md) which will otherwise prevent you from using the Standard Assets.
-- In the ```Project``` window, go to ```Assets```, ```Standard Assets```, ```Characters```, ```FirstPersonCharacter```, ```Prefabs```, and you'll find an object called an FPSController. Drop that FPSController into the Hierarchy window.
-- In the Hierarchy window, expand the FPSController arrow, and click the FirstPersonCharacter icon.
+- In the ```GameObject``` menu, choose ```Create Empty```. Name it "player."
+- Select the player in the Hierarchy tab, and in the Inspector tab, press ```Add Component```. Search for ```Character Controller``` and add it. You should now see a wireframe Minion-shaped capsule appear in the Scene tab.
+- Click back on the player in the Hierarchy tab, right-click, and select ```Camera```. A new mini-window should appear showing the view from the camera, which will be from the point of view of the player capsule (if your mesh is positioned in view of the camera, you'll see it, otherwise it'll just show a blue sky and grey-brown blank ground).
+- Right-click on the ```Main Camera``` object in the Heirarchy pane, and delete it. We don't need it since we have a camera on the player.
+- With the camera selected, set the Y position in the Inspector to 1 (that'll just put the camera at the top of the capsule, which will make sense for a human-esque point of view).
 
+### Add a script to control the player and camera
+- In the Assets directory of this repo, there's a script called ```PlayerController.cs```. In your file explorer, copy this script into the Assets directory of the project. When you return to the Unity editor, it will proceed to import the script.
+- Select the player object in the Hierarchy pane. Drag the PlayerController script from the Assets pane into the lower part of the Inspector pane, which should have the effect of attaching the script to the player (whenever selecting the player, you'll now see the PlayerController script's properties in the Inspector pane, below the Character Controller component).
+- In the Hierarchy pane, select the player. Then drag the child Camera into the PlayerCamera slot in the PlayerController script properties (which probably says ```Transform None``` at the moment) in the Inspector. This links the camera to the corresponding object in the script (and is easy to forget, which will cause the controls to not work).
+- You should be able to press the play button at the top of the editor screen and try it now. To exit play mode, press the play button again (there's no stop button, and the pause button doesn't exit play mode). 
 
+## Lighting
+The single-point lighting that seems to be the default in Unity leaves nasty shadows in the scene. Global illumination would be better, presumably. However, it seems as though this makes it tricky to build for WebGL. To be investigated. 
+
+# Build for WebGL
+- Select ```File``` -> ```Build Settings```, select WebGL, and press ```Switch Platform```. That takes some time as Unity pre-processes a bunch of stuff.
+- You'll need to disable compression on the build; for some reason the compression causes the WebGL app to load to 90% and stop.
+  - In the Build Settings pane, push the ```Player Settings...``` button on the lower left. Select ```Player``` along the left, and set ```Compression Format``` to Disabled.
+- Push the Build button. If you're on Linux and encounter a failure, it might be the library issue in the Gotchas section of the [Unity setup](/script/unity_setup) instructions.
+- If it works, it'll output a folder containing an index.html file and a couple of folders full of data. That's what you'll stick on a Web server somewhere.
+  - To test it locally, ```cd``` into the folder, and start a tiny local webserver with ```python3 -m http.server --cgi 8360```. Then in your browser type the address ```http://localhost:8360/index.html```.
+## Deploy
+- Get a server and a domain name, set up the nameservers, install Nginx, set up SSL with LetsEncrypt, stick the index.html file and data folders in the www data directory.
