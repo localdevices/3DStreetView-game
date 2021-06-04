@@ -1,12 +1,12 @@
 # Build a Unity project to explore an ODM mesh
 
 ## Prerequisites
-- You need to have Unity Hub installed and an empty project based on teh 3D template running. Hopefully you followed [these instructions](/docs/unity_setup.md).
+- You need to have Unity Hub installed and an empty project based on the default 3D template. Hopefully you followed [these instructions](/docs/unity_setup.md).
 - You need a mesh with the y-axis facing up (normally ODM places the z-axis facing up, so you'll need to [rotate it in Meshlab according to these instructions](/docs/rotate_mesh_in_meshlab.md).
 
 ## Add the ODM mesh
-- Open your file explorer, and in the Unity directory, go to the ```Assets``` subdirectory. In it, create a directory called ```odm_mesh```.
-- Drop the entire ```odm_textured_model``` directory in there, _including the .obj file with the y-axis facing up_.
+- Open your file explorer, and in the Unity directory, go to the ```Assets``` subdirectory. In it, create a directory called ```my_location_mesh``` (or whatever name/description will make sense to you).
+- Drop the entire ```odm_textured_model``` directory in there, _including the .obj file with the y-axis facing up_ as per the mesh rotation instructions.
 - Head back to the Unity editor, which will proceed to import the model (takes a few minutes).
 - Drag the .obj file into the Hierarchy window on the upper left (in the Sample Scene). It should appear in the Scene tab.
 
