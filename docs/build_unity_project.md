@@ -6,15 +6,15 @@
 
 ## Add the ODM mesh
 - Open your file explorer, and in the Unity directory, go to the ```Assets``` subdirectory. In it, create a directory called ```my_location_mesh``` (or whatever name/description will make sense to you).
-- Drop the entire ```odm_textured_model``` directory in there, _including the .obj file with the y-axis facing up_ as per the mesh rotation instructions.
-- Head back to the Unity editor, which will proceed to import the model (takes a few minutes).
+- Drop the entire ```odm_textured_model``` directory in there (maybe rename it so it's possible to distinguish it from any other ODM mesh), _including the .obj file with the y-axis facing up_ as per the mesh rotation instructions.
+- Head back to the Unity editor, which will proceed to import the model (takes a few minutes). The directory should appear as a folder icon in the Assets pane, and if you click to enter it you should find the .obj file.
 - Drag the .obj file into the Hierarchy window on the upper left (in the Sample Scene). It should appear in the Scene tab.
 
 ## Add the First-Person Character Controller
 - In the ```GameObject``` menu, choose ```Create Empty```. Name it "player."
 - Select the player in the Hierarchy tab, and in the Inspector tab, press ```Add Component```. Search for ```Character Controller``` and add it. You should now see a wireframe Minion-shaped capsule appear in the Scene tab.
 - Click back on the player in the Hierarchy tab, right-click, and select ```Camera```. A new mini-window should appear showing the view from the camera, which will be from the point of view of the player capsule (if your mesh is positioned in view of the camera, you'll see it, otherwise it'll just show a blue sky and grey-brown blank ground).
-- Right-click on the ```Main Camera``` object in the Heirarchy pane, and delete it. We don't need it since we have a camera on the player.
+- We can now remove the default camera. Right-click on the ```Main Camera``` object in the Heirarchy pane, and delete it. We don't need it since we have a camera on the player.
 - With the camera selected, set the Y position in the Inspector to 1 (that'll just put the camera at the top of the capsule, which will make sense for a human-esque point of view).
 
 ### Add a script to control the player and camera
