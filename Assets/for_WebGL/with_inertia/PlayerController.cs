@@ -6,11 +6,15 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] Transform playerCamera = null;
     
-    [SerializeField] float mouseSensitivity = 1.0f;
-    [SerializeField] float keyRotSensitivity = 0.01f;
+    bool lockCursor = true; // I don't remember why
     
-    [SerializeField] bool lockCursor = true;
-    
+    float mouseSensitivity = 1.0f;
+    float keyRotSensitivity = 6.0f;
+    float rotDamper = 2.0f;
+    float keySlewSensitivity = 6.0f;
+    float slewDamper = 3.0f;
+    float minSpeedSqrt = 0.1f;
+
     float cameraPitch = 0.0f;
     float vTOL = 0.0f;
     float strafe = 0.0f;
@@ -56,16 +60,17 @@ public class PlayerController : MonoBehaviour
     
     void UpdateRotation()
     {
+        float d = (1.0f - (rotDamper * Time.deltaTime));
 	if(Input.GetKey(";")) yaw += keyRotSensitivity;
 	if(Input.GetKey("k")) yaw -= keyRotSensitivity;
 	yaw += Input.GetAxis("Mouse X") * mouseSensitivity;
-	yaw *= 0.95f;
+	yaw *= d;
 	transform.Rotate(Vector3.up * yaw * Time.deltaTime);
 	
 	if(Input.GetKey("o")) pitch -= keyRotSensitivity * yInvert;
 	if(Input.GetKey("l")) pitch += keyRotSensitivity * yInvert;
 	pitch -= Input.GetAxis("Mouse Y") * mouseSensitivity * yInvert;
-	pitch *= 0.95f;
+	pitch *= d;
 	cameraPitch += pitch * Time.deltaTime;
 	cameraPitch = Mathf.Clamp(cameraPitch, -85.0f, 85.0f);
 	playerCamera.localEulerAngles = Vector3.right * cameraPitch;	
@@ -73,18 +78,22 @@ public class PlayerController : MonoBehaviour
     
     void UpdateMovement()
     {
-        float t = Time.deltaTime;
-        if(Input.GetKey("e")) vTOL += 6.0f * t;
-	if(Input.GetKey("q")) vTOL -= 6.0f * t;
-	if(Input.GetKey("d")) strafe += 6.0f * t;
-	if(Input.GetKey("a")) strafe -= 6.0f * t;
-	if(Input.GetKey("w")) forward += 6.0f * t;
-	if(Input.GetKey("s")) forward -= 6.0f * t;
+	float m = Time.deltaTime * keySlewSensitivity;
+        if(Input.GetKey("e")) vTOL += m;
+	if(Input.GetKey("q")) vTOL -= m;
+	if(Input.GetKey("d")) strafe += m;
+	if(Input.GetKey("a")) strafe -= m;
+	if(Input.GetKey("w")) forward += m;
+	if(Input.GetKey("s")) forward -= m;
         if(Input.GetKey("space"))
 	{
-	    vTOL *= 0.95f;
-	    strafe *= 0.95f;
-	    forward *= 0.95f;
+	    float brake = (1.0f - (slewDamper * Time.deltaTime));
+	    vTOL *= brake;
+	    if(vTOL * vTOL < minSpeedSqrt) vTOL = 0;
+	    strafe *= brake;
+	    if(strafe * strafe < minSpeedSqrt) strafe = 0;
+	    forward *= brake;
+	    if(forward * forward < minSpeedSqrt) forward = 0;
 	}
 	
 	Vector2 keySlew = new Vector2(strafe, forward);
