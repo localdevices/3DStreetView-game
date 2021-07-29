@@ -24,7 +24,59 @@
 - You should be able to press the play button at the top of the editor screen and try it now. To exit play mode, press the play button again (there's no stop button, and the pause button doesn't exit play mode). 
 
 ## Lighting
-The single-point lighting that seems to be the default in Unity leaves nasty shadows in the scene. Global illumination would be better, presumably. However, it seems as though this makes it tricky to build for WebGL. To be investigated. 
+The single-point lighting that seems to be the default in Unity leaves nasty shadows in the scene. To fix this, select the ```Directional Light``` object in the Hierarchy pane, and, in the Inspector pane, set the ```Shadow Type``` property to ```No Shadows```. If your scene then appears overly brightly lit, reduce the ```Intensity``` to something less than 1 (for meshes that were shot in full daylight, a value of about 0.6 seems pleasant).
+
+## Heads Up Display (HUD)
+We need a way for people to know which keys to press to move, particularly in a WebGL game, which does not support joysticks or gamepads! The PlayerController we built uses a setup that will be somewhat familiar to experienced gamers; the left hand controls movement (translation) and the right hand controls twhere you are looking (rotation). On the keyboard, this translates to:
+
+__Translation__
+- W for forward
+- S for backward
+- A to move sideways (sidle) to the left
+- D to sidle right
+- E to levitate straight up in the air
+- Q to sink back straight down
+- The SPACE bar rapidly slows all movement in all three dimensions. If tapped briefly, it allows the player to slow down to maneuver, and if held down, it brings all movement to a stop.
+
+__Rotation__
+- O to look up
+- L to look down
+- K to look left
+- ; (semicolon) to look right
+The mouse also functions to look around. This can be confusing, as once the game starts, if the user clicks their mouse button within the game area, the mouse pointer disappears and all mouse movements are "captured" by the game. The ESC button releases the mouse back to the desktop.
+
+__Other controls__
+While the instructions are useful to get people started, they get in the way of normal exploration, so the H button toggles the instruction overlay to invisibility.
+
+Some people (especially those of us raised on flight simulators, or more recently on drone flight controls) prefer the right-hand stick movements to mimic the movement of the "aircraft" we are controlling. This is known as an [Inverted Y-axis](https://www.theguardian.com/games/2020/feb/28/why-do-video-game-players-invert-the-controls). Pressing the Y button causes the game to switch to an inverted Y axis, swapping the function of the O and L keys (or equivalent mouse movements).
+
+### Instructions Canvas
+Unity has a Canvas element, which instead of being part of the 3D world, is like a flat transparency just in front of the camera.  We'll put the instructions on that.
+
+Gameobject -> UI -> Canvas creates an empty Canvas and an EvenSystem. Select the Canvas object in the Hierarchy pane, and drag the CanvasController to the empty space in the Inspector pane below it.
+
+Now hit the 2D button in the Scene pane, and zoom out a ludicrous amount until you see the whole Canvas, which will be a giant white square that makes the mesh look microsopic. 
+
+Right-click on the Canvas in the Hierarchy pane, and select Text. Set the text to font size 28 and Bold. We set the color to Hex ```0F0101``` (a dark red). In the Text box in the Inspector, paste:
+
+```
+Q - Float down       W - Forward         E - Float up
+A - Sidle left            S - Backward       D - Sidle right
+      SPACE - Brakes! Slow down in all directions
+```
+Move that text block to a corner of the screen, and repeat with two more text blocks:
+
+```
+                               O - Look up       
+K - Look  left         L - Look down     ; - Look right
+            Or use your mouse to look around
+```
+
+```
+ESC - Get your mouse back
+Y - Invert Y-Axis
+H - Hide instructions
+```
 
 # Build for WebGL
 - Select ```File``` -> ```Build Settings```, select WebGL, and press ```Switch Platform```. That takes some time as Unity pre-processes a bunch of stuff.
