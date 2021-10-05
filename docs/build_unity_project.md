@@ -57,7 +57,7 @@ Gameobject -> UI -> Canvas creates an empty Canvas and an EvenSystem. Select the
 
 Now hit the 2D button in the Scene pane, and zoom out a ludicrous amount until you see the whole Canvas, which will be a giant white square that makes the mesh look microsopic. 
 
-Right-click on the Canvas in the Hierarchy pane, and select Text. Set the text to font size 28 and Bold. We set the color to Hex ```0F0101``` (a dark red). In the Text box in the Inspector, paste:
+Right-click on the Canvas in the Hierarchy pane, choose the UI menu, and select Text. Set the text to font size 28 and Bold. We set the color to Hex ```0F0101``` (a dark red). In the Text box in the Inspector, paste:
 
 ```
 Q - Float down       W - Forward         E - Float up
