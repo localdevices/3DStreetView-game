@@ -53,30 +53,14 @@ Some people (especially those of us raised on flight simulators, or more recentl
 ### Instructions Canvas
 Unity has a Canvas element, which instead of being part of the 3D world, is like a flat transparency just in front of the camera.  We'll put the instructions on that.
 
-Gameobject -> UI -> Canvas creates an empty Canvas and an EvenSystem. Select the Canvas object in the Hierarchy pane, and drag the CanvasController to the empty space in the Inspector pane below it.
+First, paste the file ```WASD game keyboard instructions for 3DStreetView_semi-translucent.png``` into the Assets directory. 
+
+Back in Unity, select Gameobject -> UI -> Canvas creates an empty Canvas and an EvenSystem. Select the Canvas object in the Hierarchy pane, and drag the CanvasController to the empty space in the Inspector pane below it.
 
 Now hit the 2D button in the Scene pane, and zoom out a ludicrous amount until you see the whole Canvas, which will be a giant white square that makes the mesh look microsopic. 
 
-Right-click on the Canvas in the Hierarchy pane, choose the UI menu, and select Text. Set the text to font size 28 and Bold. We set the color to Hex ```0F0101``` (a dark red). In the Text box in the Inspector, paste:
-
-```
-Q - Float down       W - Forward         E - Float up
-A - Sidle left            S - Backward       D - Sidle right
-      SPACE - Brakes! Slow down in all directions
-```
-Move that text block to a corner of the screen, and repeat with two more text blocks:
-
-```
-                               O - Look up       
-K - Look  left         L - Look down     ; - Look right
-            Or use your mouse to look around
-```
-
-```
-ESC - Get your mouse back
-Y - Invert Y-Axis
-H - Hide instructions
-```
+Right-click on the Canvas in the Hierarchy pane, choose the UI menu, and select RawImage. Select that image in the Hierarchy pane, and drag the 
+```WASD game keyboard instructions for 3DStreetView_semi-translucent.png``` asset into the ```Texture``` slot in the Inspector pane. Resize and move the image to taste (keeping in mind that if it's too far to the side, it won't show correctly in some windows; don't worry, the user can hide it by pressing the H button any time).
 
 # Build for WebGL
 - Select ```File``` -> ```Build Settings```, select WebGL, and press ```Switch Platform```. That takes some time as Unity pre-processes a bunch of stuff.
